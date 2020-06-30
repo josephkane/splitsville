@@ -56,23 +56,14 @@ let app = new Vue({
   el: "#app",
 
   data: {
-    // agentName: "Agent",
-    // agentTakeHome: 0,
-    // brokerOneName: "Broker 1",
-    // brokerOneTakeHome: 0,
-    // brokerTwoName: "Broker 2",
-    // brokerTwoTakeHome: 0,
-    // collierTakeHome: 0,
-    // calculated: false,
-
-    agentName: "Joe",
-    agentTakeHome: 12585.85,
-    brokerOneName: "Emmy",
-    brokerOneTakeHome: 69.02,
+    agentName: "Agent",
+    agentTakeHome: 0,
+    brokerOneName: "Broker 1",
+    brokerOneTakeHome: 0,
     brokerTwoName: "Broker 2",
     brokerTwoTakeHome: 0,
-    collierTakeHome: 345.13,
-    calculated: true,
+    collierTakeHome: 0,
+    calculated: false,
   },
   methods: {
     calculate(data) {
@@ -103,11 +94,6 @@ let app = new Vue({
       }
 
       this.calculated = true;
-
-      console.log("agent take home:", this.agentTakeHome);
-      console.log("broker1 take home:", this.brokerOneTakeHome);
-      console.log("broker2 take home:", this.brokerTwoTakeHome);
-      console.log("collier take home:", this.collierTakeHome);
     },
     clear() {
       this.agentTakeHome = 0;
