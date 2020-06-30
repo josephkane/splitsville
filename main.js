@@ -96,6 +96,9 @@ let app = new Vue({
       this.calculated = true;
     },
     clear() {
+      this.agentName = "Agent";
+      this.brokerOneName = "Broker 1";
+      this.brokerTwoName = "Broker 2";
       this.agentTakeHome = 0;
       this.brokerOneTakeHome = 0;
       this.brokerTwoTakeHome = 0;
