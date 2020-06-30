@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Splitsville</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="ca-header">
+        <img src="img/CollierLogo.png" alt="Collier and Associates">
+      </div>
+      <data-input inline-template @calculate="calculate" @clear="clear">
+        <div class="data-input-wrapper">
+          <form class="data-input-form" @submit.prevent="onSubmit">
+            <!-- AGENT -->
+            <div class="section">
+              <h4>Agent</h4>
+              <div class="d-flex">
+                <div class="inputs-wrapper">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" v-model="agentName">
+                  </div>
+                  <div class="form-group">
+                    <label>Cap Amount</label>
+                    <input type="number" class="form-control" v-model.number="agentCap">
+                  </div>
+                  <div class="form-group">
+                    <label>Gross Title Check</label>
+                    <input type="number" class="form-control" v-model.number="agentGross">
+                  </div>
+                </div>
+                <div class="inputs-wrapper">
+                  <div class="form-group">
+                    <label>Current Contribution</label>
+                    <input type="number" class="form-control" v-model.number="agentCurrent">
+                  </div>
+                  <div class="form-group">
+                    <label>Pre-cap Split</label>
+                    <input type="number" class="form-control" step="0.001" v-model.number="agentPreSplit">
+                  </div>
+                  <div class="form-group">
+                    <label>Post-cap Split</label>
+                    <input type="number" class="form-control" step="0.001" v-model.number="agentPostSplit">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- BROKER ONE -->
+            <div class="section">
+              <h4>Broker 1</h4>
+              <div class="inputs-wrapper">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control" v-model="brokerOneName">
+                </div>
+                <div class="form-group">
+                  <label>Pre-cap Split</label>
+                  <input type="number" class="form-control" step="0.001" v-model.number="brokerOnePreSplit">
+                </div>
+                <div class="form-group">
+                  <label>Post-cap Split</label>
+                  <input type="number" class="form-control" step="0.001" v-model.number="brokerOnePostSplit">
+                </div>
+              </div>
+            </div>
+            <!-- BROKER TWO -->
+            <div class="section">
+              <h4>Broker 2</h4>
+              <div class="inputs-wrapper">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control" v-model="brokerTwoName">
+                </div>
+                <div class="form-group">
+                  <label>Pre-cap Split</label>
+                  <input type="number" class="form-control" step="0.001" v-model.number="brokerTwoPreSplit">
+                </div>
+                <div class="form-group">
+                  <label>Post-cap Split</label>
+                  <input type="number" class="form-control" step="0.001" v-model.number="brokerTwoPostSplit">
+                </div>
+              </div>
+            </div>
+            <div class="data-input-button-wrapper d-flex justify-content-end">
+              <button class="btn btn-lg btn-secondary" type="button" v-on:click="clear">Clear</button>
+              <button class="btn btn-lg btn-primary" type="submit">Calculate!</button>
+            </div>
+          </form>
+        </div>
+      </data-input>
+      <div v-show="calculated">
+        <div class="results-wrapper d-flex">
+          <div class="labels">
+            <p>
+              <span class="label">{{ agentName }}:</span>
+            </p>
+            <p>
+              <span class="label">{{ brokerOneName }}:</span>
+            </p>
+            <p>
+              <span class="label">{{ brokerTwoName }}:</span>
+            </p>
+            <p>
+              <span class="label">Collier:</span>
+            </p>
+          </div>
+          <div class="results">
+            <p>
+              <span class="data">{{ agentTakeHome | currency }}</span>
+            </p>
+            <p>
+              <span class="data">{{ brokerOneTakeHome | currency }}</span>
+            </p>
+            <p>
+              <span class="data">{{ brokerTwoTakeHome | currency }}</span>
+            </p>
+            <p>
+              <span class="data">{{ collierTakeHome | currency }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue2-filters/dist/vue2-filters.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
